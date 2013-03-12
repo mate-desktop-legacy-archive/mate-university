@@ -1,2 +1,3 @@
 applet-c/applet.c
 [type: gettext/ini]applet-c/org.mate.university.Applet.mate-panel-applet.in.in
+[type: gettext/ini]applet-python/org.mate.university.PythonApplet.mate-panel-applet.in.in
