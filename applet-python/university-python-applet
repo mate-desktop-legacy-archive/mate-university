@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+#
+# Copyright (C) 2013 Stefano Karapetsas
+#
+#  This file is part of MATE University.
+#
+#  MATE University is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  MATE University is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with MATE University.  If not, see <http://www.gnu.org/licenses/>.
+#
+# Authors:
+#      Stefano Karapetsas <stefano@karapetsas.com>
+
+
+# this code is based on example appet by Vincent Untz for GNOME Panel 3
+# http://git.gnome.org/browse/gnome-panel/commit/?id=5ad4d9e
+
+# ensure we are using Gtk 2, not Gtk3
+# this will print a warning but everything should work
+import gi
+gi.require_version("Gtk", "2.0")
+
+from gi.repository import Gtk
+from gi.repository import MatePanelApplet
+
+# create the applet
+def applet_fill(applet):
+
+    # you can use this path with gio/gsettings
+    settings_path = applet.get_preferences_path()
+
+    # we add the Gtk label into the applet
+    label = Gtk.Label("Hello world!")
+    applet.add(label)
+
+    applet.show_all()
+
+# this is called by mate-panel on applet creation
+def applet_factory(applet, iid, data):
+
+    if iid != "UniversityPythonApplet":
+       return False
+ 
+    applet_fill(applet)
+
+    return True
+
+MatePanelApplet.Applet.factory_main("UniversityPythonAppletFactory", True,
+                                    MatePanelApplet.Applet.__gtype__,
+                                    applet_factory, None)

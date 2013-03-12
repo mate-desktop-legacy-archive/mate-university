@@ -1,1 +1,1 @@
-SUBDIRS = po applet-c
+SUBDIRS = po applet-c applet-python
