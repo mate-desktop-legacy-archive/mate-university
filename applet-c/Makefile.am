@@ -1,6 +1,5 @@
 AM_CPPFLAGS = \
 	$(APPLET_CFLAGS) \
-	$(FISH_CFLAGS) \
 	-I$(srcdir) \
 	-DMATELOCALEDIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	$(DISABLE_DEPRECATED_CFLAGS)
