@@ -1,6 +1,6 @@
 
 AC_INIT([mate-university],
-        [1.5.0],
+        [1.7.0],
         [https://github.com/mate-desktop/mate-university/issues],
         [mate-university],
         [http://www.mate-desktop.org])
@@ -17,7 +17,7 @@ AC_SUBST(GETTEXT_PACKAGE)
 AM_GLIB_GNU_GETTEXT
 
 # applet-c
-PKG_CHECK_MODULES(APPLET, libmatepanelapplet-4.0 >= 1.5.0)
+PKG_CHECK_MODULES(APPLET, libmatepanelapplet-4.0 >= 1.7.0)
 AC_SUBST(APPLET_CFLAGS)
 AC_SUBST(APPLET_LIBS)
 
