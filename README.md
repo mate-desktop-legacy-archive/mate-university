@@ -6,8 +6,8 @@ beginners) to learn how to develop new panel applets, Caja (file manager)
 extensions, pluma (text editor) and eom (image viewer) plugins, etc. to
 expand the already powerful MATE Desktop experience.
 
-Online source: https://github.com/mate-desktop/mate-university
-Online documentation: http://wiki.mate-desktop.org/university
+  * Online source: https://github.com/mate-desktop/mate-university
+  * Online documentation: http://wiki.mate-desktop.org/university
 
 
 
