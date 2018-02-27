@@ -21,20 +21,30 @@
  *      Stefano Karapetsas <stefano@karapetsas.com>
  */
 
-#include <config.h>
 
-#include <glib.h>
-#include <glib/gi18n.h>
-#include <gtk/gtk.h>
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif /* HAVE_CONFIG_H */
 
-#include <mate-panel-applet.h>
-#include <mate-panel-applet-gsettings.h>
+#include "applet.h"
+#include "about.h"
 
-typedef struct
-{
-    MatePanelApplet   *applet;
-    GtkWidget         *label;
-} UniversityApplet;
+
+/* This runs if the user clicks the 'About' button in the context menu */
+static void about_cb (GtkAction *action, gpointer data) {
+    UniversityApplet *university_applet;
+    university_applet = (UniversityApplet *) data;
+
+    about_dialog_open (university_applet);
+}
+
+/* Add menu entry actions */
+static const GtkActionEntry university_applet_menu_actions[] = {
+
+    { "About", "help-about", N_("_About"),
+        NULL, NULL,
+        G_CALLBACK(about_cb) }
+};
 
 static gboolean
 university_applet_fill (MatePanelApplet* applet)
@@ -43,17 +53,57 @@ university_applet_fill (MatePanelApplet* applet)
 
     /* set mate-panel applet options */
     mate_panel_applet_set_flags (applet, MATE_PANEL_APPLET_EXPAND_MINOR);
-    mate_panel_applet_set_background_widget(applet, GTK_WIDGET(applet));
+    mate_panel_applet_set_background_widget (applet, GTK_WIDGET(applet));
 
     /* create the UniversityApplet struct */
-    university_applet = g_malloc0(sizeof(UniversityApplet));
+    university_applet = g_malloc0 (sizeof (UniversityApplet));
     university_applet->applet = applet;
-    university_applet->label = gtk_label_new(_("Hello world!"));
+
+    /* create new label */
+    university_applet->label = gtk_label_new (_("Hello world!"));
 
     /* we add the Gtk label into the applet */
     gtk_container_add (GTK_CONTAINER(applet), university_applet->label);
 
-    gtk_widget_show_all (applet);
+/* menu */
+
+    /* Adding menu with the built in, now deprecated GtkUIManager
+     * The factory adds ui_manager automatically to an applet
+     * and sets up the basic context menu
+     * ('Remove from panel', 'Move', 'Lock to panel') */
+
+    /* Menu definition for the ui_manager */
+    gchar *ui_xml = g_strdup ("<menuitem name=\"About Item\" action=\"About\"/>");
+
+    /* suppress compiler warnings */
+    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
+
+    /* create action group */
+    GtkActionGroup *action_group = gtk_action_group_new ("University Applet Actions");
+    gtk_action_group_set_translation_domain (action_group, GETTEXT_PACKAGE);
+
+    /* add previously defined actions */
+    gtk_action_group_add_actions (action_group,
+                                  university_applet_menu_actions,
+                                  G_N_ELEMENTS (university_applet_menu_actions),
+                                  applet);
+
+    G_GNUC_END_IGNORE_DEPRECATIONS;
+
+    /* MatePanelApplet *applet, const gchar *xml, GtkActionGroup *applet_action_group */
+    mate_panel_applet_setup_menu (applet, ui_xml, action_group);
+
+    /* free reference from this function
+     * the applet / ui_manager is going to take ownership */
+    g_object_unref (action_group);
+
+    /* this string gets copied, so free it */
+    g_free (ui_xml);
+
+/* menu end */
+
+    /* show applet and all of its children, like label */
+    gtk_widget_show_all (GTK_WIDGET(applet));
 
     return TRUE;
 }
@@ -64,14 +114,20 @@ university_factory (MatePanelApplet* applet, const char* iid, gpointer data)
 {
     gboolean retval = FALSE;
 
-    if (!g_strcmp0(iid, "UniversityApplet"))
+    if (!g_strcmp0 (iid, "UniversityApplet"))
         retval = university_applet_fill (applet);
 
     return retval;
 }
 
-MATE_PANEL_APPLET_OUT_PROCESS_FACTORY("UniversityAppletFactory",
-                                      PANEL_TYPE_APPLET,
-                                      "Sample applet",
-                                      university_factory,
-                                      NULL)
+/* https://github.com/mate-desktop/mate-panel/blob/master/libmate-panel-applet/mate-panel-applet.h#L145 */
+/* This function essentially makes a new factory and
+ * registers it as a DBus service.
+ * When a user adds this applet to the mate-panel,
+ * the callback is called, creating an applet. */
+MATE_PANEL_APPLET_OUT_PROCESS_FACTORY("UniversityAppletFactory",    /* factory_id */
+                                      PANEL_TYPE_APPLET,            /* type */
+                                      "Sample applet",              /* name */
+                                      university_factory,           /* callback */
+                                      NULL)                         /* data */
+

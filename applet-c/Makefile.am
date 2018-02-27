@@ -5,7 +5,7 @@ AM_CPPFLAGS = \
 	$(DISABLE_DEPRECATED_CFLAGS)
 AM_CFLAGS = $(WARN_CFLAGS)
 
-APPLET_SOURCES = applet.c
+APPLET_SOURCES = applet.c about.c
 APPLET_LDADD = $(APPLET_LIBS)
 APPLET_LOCATION = $(libexecdir)/university-applet
 
