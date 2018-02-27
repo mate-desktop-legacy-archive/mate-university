@@ -24,10 +24,9 @@
 # this code is based on example appet by Vincent Untz for GNOME Panel 3
 # http://git.gnome.org/browse/gnome-panel/commit/?id=5ad4d9e
 
-# ensure we are using Gtk 2, not Gtk3
-# this will print a warning but everything should work
+
 import gi
-gi.require_version("Gtk", "2.0")
+gi.require_version("Gtk", "3.0")
 
 from gi.repository import Gtk
 from gi.repository import MatePanelApplet
