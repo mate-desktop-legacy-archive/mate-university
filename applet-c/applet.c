@@ -59,11 +59,31 @@ university_applet_fill (MatePanelApplet* applet)
     university_applet = g_malloc0 (sizeof (UniversityApplet));
     university_applet->applet = applet;
 
+/* To pack more thing next to each other, a container is needed.
+ * (like GtkGrid)
+ * comment out the following define to use the label */
+#define USE_PICTURE
+
+#ifdef USE_PICTURE
+/* image */
+    /* Create an image from one of the current theme icons */
+    /* GtkWidget * gtk_image_new_from_icon_name (const gchar *icon_name, GtkIconSize size); */
+    GtkWidget *image = gtk_image_new_from_icon_name ("go-up", GTK_ICON_SIZE_BUTTON);
+
+    /* add it to the applet */
+    gtk_container_add (GTK_CONTAINER(applet), image);
+
+#else
+
+/* label */
+
     /* create new label */
     university_applet->label = gtk_label_new (_("Hello world!"));
 
     /* we add the Gtk label into the applet */
     gtk_container_add (GTK_CONTAINER(applet), university_applet->label);
+
+#endif
 
 /* menu */
 
