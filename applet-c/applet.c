@@ -70,6 +70,10 @@ university_applet_fill (MatePanelApplet* applet)
     /* GtkWidget * gtk_image_new_from_icon_name (const gchar *icon_name, GtkIconSize size); */
     GtkWidget *image = gtk_image_new_from_icon_name ("go-up", GTK_ICON_SIZE_BUTTON);
 
+    /* add a tooltip to the image */
+    /* void gtk_widget_set_tooltip_text (GtkWidget *widget, const gchar *text); */
+    gtk_widget_set_tooltip_text (image, _("Hello world!"));
+
     /* add it to the applet */
     gtk_container_add (GTK_CONTAINER(applet), image);
 
