@@ -30,17 +30,8 @@
 
 /* drawing event */
 static gboolean
-#if GTK_CHECK_VERSION (3, 0, 0)
 window_draw (GtkWidget *widget, cairo_t *cr, gpointer data)
-#else
-window_expose_event (GtkWidget *widget, GdkEventExpose *event, gpointer data)
-#endif
 {
-#if !GTK_CHECK_VERSION (3, 0, 0)
-    cairo_t *cr;
-
-    cr = gdk_cairo_create(widget->window);
-#endif
 
     /* draw a line */
     cairo_move_to (cr, 20, 20);
@@ -49,9 +40,6 @@ window_expose_event (GtkWidget *widget, GdkEventExpose *event, gpointer data)
     cairo_set_line_cap (cr, CAIRO_LINE_CAP_ROUND);
     cairo_stroke (cr);
 
-#if !GTK_CHECK_VERSION (3, 0, 0)
-    cairo_destroy(cr);
-#endif
     return FALSE;
 }
 
@@ -82,11 +70,7 @@ main(int argc, char** argv)
     g_signal_connect (GTK_WIDGET (window), "destroy", gtk_main_quit, NULL);
 
     /* drawing signal */
-#if GTK_CHECK_VERSION (3, 0, 0)
     g_signal_connect (widget, "draw", G_CALLBACK (window_draw), NULL);
-#else
-    g_signal_connect (widget, "expose-event", G_CALLBACK (window_expose_event), NULL);
-#endif
 
     gtk_widget_show_all (GTK_WIDGET (window));
 
