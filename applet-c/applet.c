@@ -48,7 +48,7 @@ university_applet_fill (MatePanelApplet* applet)
     /* create the UniversityApplet struct */
     university_applet = g_malloc0(sizeof(UniversityApplet));
     university_applet->applet = applet;
-    university_applet->label = gtk_label_new(_("Hello world!"));
+    university_applet->label = gtk_label_new("Hello world!");
 
     /* we add the Gtk label into the applet */
     gtk_container_add (GTK_CONTAINER(applet), university_applet->label);

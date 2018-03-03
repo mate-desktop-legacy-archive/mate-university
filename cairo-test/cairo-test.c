@@ -55,7 +55,7 @@ main(int argc, char** argv)
     /* create window */
     window = GTK_WINDOW (gtk_window_new (GTK_WINDOW_TOPLEVEL));
 
-    gtk_window_set_title (window, _("Cairo Test"));
+    gtk_window_set_title (window, "Cairo Test");
 
     /* create drawing area */
     widget = gtk_drawing_area_new ();

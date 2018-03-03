@@ -1,0 +1,10 @@
+[Applet Factory]
+Id=UniversityPythonAppletFactory
+Location=@LOCATION@
+Name=University Python Factory
+Description=A MATE Python Applet example factory
+
+[UniversityPythonApplet]
+Name=MATE University Python Applet
+Description=A MATE Python Applet example
+Icon=desktop

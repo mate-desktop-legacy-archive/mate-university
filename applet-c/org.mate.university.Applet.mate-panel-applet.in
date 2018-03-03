@@ -1,0 +1,10 @@
+[Applet Factory]
+Id=UniversityAppletFactory
+Location=@LOCATION@
+Name=University Factory
+Description=Sample Factory
+
+[UniversityApplet]
+Name=MATE University Applet
+Description=A sample hello world applet to learn MATE
+Icon=desktop

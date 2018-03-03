@@ -9,12 +9,7 @@ AC_CONFIG_HEADERS(config.h)
 AC_PROG_CC
 AC_PROG_INSTALL
 AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz tar-ustar -Wno-portability])
-IT_PROG_INTLTOOL([0.35.0])
 
-GETTEXT_PACKAGE=mate-university
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Define the gettext package to be used])
-AC_SUBST(GETTEXT_PACKAGE)
-AM_GLIB_GNU_GETTEXT
 
 GTK_REQUIRED=3.0.0
 
@@ -33,5 +28,4 @@ Makefile
 applet-c/Makefile
 applet-python/Makefile
 cairo-test/Makefile
-po/Makefile.in
 ])
