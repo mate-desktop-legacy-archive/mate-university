@@ -33,7 +33,11 @@ org.mate.panel.applet.UniversityAppletFactory.service: $(service_in_files)
 		-e "s|\@LOCATION\@|$(APPLET_LOCATION)|" \
 		$< > $@
 
+CLEANFILES = $(applets_DATA) \
+	$(applets_DATA).in \
+	$(service_DATA)
+
 EXTRA_DIST = \
-	$(applets_in_files) \
+	$(applets_in_files).in \
 	$(service_in_files)
 
