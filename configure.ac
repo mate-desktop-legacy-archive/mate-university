@@ -3,7 +3,7 @@ AC_INIT([mate-university],
         [1.7.0],
         [https://github.com/mate-desktop/mate-university/issues],
         [mate-university],
-        [http://www.mate-desktop.org])
+        [https://mate-desktop.org])
 
 AC_CONFIG_HEADERS(config.h)
 AC_PROG_CC
