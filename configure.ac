@@ -10,6 +10,7 @@ AC_PROG_CC
 AC_PROG_INSTALL
 AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz tar-ustar -Wno-portability])
 IT_PROG_INTLTOOL([0.35.0])
+MATE_COMPILE_WARNINGS([yes])
 
 GETTEXT_PACKAGE=mate-university
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Define the gettext package to be used])
