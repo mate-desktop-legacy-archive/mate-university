@@ -5,6 +5,8 @@ AC_INIT([mate-university],
         [mate-university],
         [https://mate-desktop.org])
 
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
 AC_CONFIG_HEADERS(config.h)
 AC_PROG_CC
 AC_PROG_INSTALL
